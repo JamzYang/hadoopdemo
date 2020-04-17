@@ -1,4 +1,4 @@
-package com.atg.hadoop.mr;
+package com.atg.hadoop.mr.wordcount;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 public class WordCount {
     public static class WordCountMapper extends Mapper<LongWritable, Text,Text, IntWritable>{
         private Text word = new Text();
-        private IntWritable one = new IntWritable();
+        private IntWritable one = new IntWritable(1);
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             StringTokenizer st = new StringTokenizer(value.toString());

@@ -5,3 +5,7 @@ hadoop
 hello
 zoom
 hadoop
+cat
+tac
+yes
+sey
