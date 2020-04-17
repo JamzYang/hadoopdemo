@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+hadoopdemo.iml
+
+/wordcount/
+src/test/
+target/
