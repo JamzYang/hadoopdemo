@@ -8,10 +8,11 @@ import org.apache.hadoop.io.ByteWritable;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.FileSplit;
+
 import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.io.IOException;
  * @author yang
  * Date 2020/4/18 23:40
  */
-public class WholeRecordReader extends RecordReader<Text, ByteWritable> {
+public class WholeRecordReader extends RecordReader<Text, BytesWritable> {
     private FileSplit split;
     private Configuration conf ;
     private Text k = new Text();
@@ -52,12 +53,12 @@ public class WholeRecordReader extends RecordReader<Text, ByteWritable> {
 
     @Override
     public Text getCurrentKey() throws IOException, InterruptedException {
-        return null;
+        return k;
     }
 
     @Override
-    public ByteWritable getCurrentValue() throws IOException, InterruptedException {
-        return null;
+    public BytesWritable getCurrentValue() throws IOException, InterruptedException {
+        return v;
     }
 
     @Override

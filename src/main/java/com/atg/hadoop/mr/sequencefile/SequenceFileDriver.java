@@ -1,6 +1,7 @@
 package com.atg.hadoop.mr.sequencefile;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.Text;
@@ -10,7 +11,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 
 import java.io.IOException;
-import java.nio.file.FileSystem;
+
 
 /**
  * @author yang
@@ -18,13 +19,17 @@ import java.nio.file.FileSystem;
  */
 public class SequenceFileDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        args = new String[] { "e:/input/inputinputformat", "e:/output4" };
+        args = new String[] { "D:\\data_develop\\learn\\testfiles\\wholefile", "wholefile" };
         Configuration conf = new Configuration();
+        Path outputdir = new Path(args[1]);
+        FileSystem fs = outputdir.getFileSystem(conf);
+        if(fs.isDirectory(outputdir)){
+            fs.delete(outputdir,true);
+        }
         Job job = Job.getInstance();
         job.setJarByClass(SequenceFileDriver.class);
         job.setMapperClass(SequenceFileMapper.class);
         job.setReducerClass(SequenceFileReducer.class);
-
 
         //设置输入输出inputFormat
         job.setInputFormatClass(WholeFileInputFormat.class);
