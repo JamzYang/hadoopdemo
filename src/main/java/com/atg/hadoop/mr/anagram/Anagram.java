@@ -1,11 +1,10 @@
 package com.atg.hadoop.mr.anagram;
 
 
-import com.atg.hadoop.mr.wordcount.WordCount;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -26,7 +25,6 @@ public class Anagram {
         if(fs.isDirectory(path)){
             fs.delete(path,true);
         }
-
         Job job = Job.getInstance();
         job.setJarByClass(Anagram.class);
         job.setMapperClass(AnagramMapper.class);
@@ -37,7 +35,5 @@ public class Anagram {
         FileInputFormat.addInputPath(job, new Path("words.txt"));
         FileOutputFormat.setOutputPath(job, path);
         job.waitForCompletion(true);
-
     }
-
 }
