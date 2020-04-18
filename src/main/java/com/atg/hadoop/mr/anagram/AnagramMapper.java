@@ -18,8 +18,8 @@ public class AnagramMapper extends Mapper<LongWritable, Text, Text, Text> {
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String word = value.toString();
         char[] chars = word.toCharArray();
-        String sortedWord = new String(chars);
         Arrays.sort(chars);
+        String sortedWord = new String(chars);
         context.write(new Text(sortedWord),value);
     }
 }

@@ -23,6 +23,9 @@ public class Anagram {
         Configuration config = new Configuration();
         Path path = new Path("anagram");
         FileSystem fs = path.getFileSystem(config);
+        if(fs.isDirectory(path)){
+            fs.delete(path,true);
+        }
 
         Job job = Job.getInstance();
         job.setJarByClass(Anagram.class);
@@ -30,7 +33,7 @@ public class Anagram {
         job.setReducerClass(AnagramReducer.class);
         job.setCombinerClass(AnagramReducer.class);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(Text.class);
         FileInputFormat.addInputPath(job, new Path("words.txt"));
         FileOutputFormat.setOutputPath(job, path);
         job.waitForCompletion(true);
